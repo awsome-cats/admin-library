@@ -1,0 +1,108 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+  <%- include("partials/header")%>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">返却リスト</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">返却リスト</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- right column -->
+          <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">返却リスト</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <table id="tbl-list-return-books" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>カテゴリー名</th>
+                      <th>タイトル名</th>
+                      <th>画像</th>
+                      <th>ユーザー情報</th>
+                      <th>貸し出し期間</th>
+                      <th>返却日</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% list.forEach(data => { %>
+                    <tr>
+                      <td>
+                        <%= data.Category.name  %>
+                      </td>
+                      <td>
+                        <%= data.Book.name  %>
+                      </td>
+                      <td>
+                        <img src="<%= data.Book.cover_image%>" alt="" style="width:80px; height:80px;">
+                      </td>
+                      <td>
+                        名前:<%= data.User.name  %><br>
+                        Eメール: <%= data.User.email  %>
+                      </td>
+                      <td>
+                        <%= data.days_issued  %>日
+                      </td>
+                      <td>
+                        <%= data.returned_date  %>日
+                      </td>
+
+                    </tr>
+                  <% }) %>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <tr>
+                      <th>カテゴリー名</th>
+                      <th>タイトル名</th>
+                      <th>画像</th>
+                      <th>ユーザー情報</th>
+                      <th>貸し出し期間</th>
+                      <th>返却日</th>
+
+                    </tr>
+                  </tr>
+                  </tfoot>
+                </table>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+

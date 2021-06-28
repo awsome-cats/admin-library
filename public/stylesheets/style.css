@@ -1,0 +1,35 @@
+/* message */
+
+.preMsg {
+  background-color:beige;
+  width:300px;
+  height:70px;
+  z-index:4;
+  position:absolute;
+  top:50px;
+  left:480px;
+}
+
+#form-add-user label.error {
+  color:red;
+}
+#form-issue-book label.error {
+  color:red;
+}
+#form-return-book label.error {
+  color:red;
+}
+#form-add-days-settings label.error {
+  color:red;
+}
+
+/* #form-currency-settings label.error {
+  color:red;
+} */
+
+.info {
+  display:none;
+  position: absolute;
+  top: 70px;
+  left: 500px;
+}

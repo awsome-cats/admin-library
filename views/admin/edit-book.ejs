@@ -1,0 +1,144 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+
+  <style>
+    #form-add-book label.error {
+      color: red;
+    }
+  </style>
+
+  <%- include("partials/header")%>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">ブックの編集</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">ブックの編集</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">ブックの編集</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+
+
+                <form method="post" id="form-edit-book" enctype="multipart/form-data" action="/admin/edit-book/<%= book.id %>">
+                  <div class="row">
+                    <!--  タイトル -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>タイトル</label>
+                        <input required value="<%= book.name%>" name="name" type="text" class="form-control" placeholder="カテゴリ名を入力して下さい">
+                      </div>
+                    </div>
+
+                    <!--  カテゴリーの選択 -->
+                    <!-- TODO:重要 associationで取得したcategoryのデータとbookのデータを使って取得する-->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>カテゴリーの選択</label>
+                        <select class="form-control" name="dd_category" required>
+                          <option value="">カテゴリーの選択</option>
+                          <% categories.forEach(element => { %>
+                            <option <% if(book.categoryId === element.id){ %> selected <% } %>  value="<%= element.id %>"><%= element.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- 内容 -->
+                      <div class="form-group">
+                        <label>内容</label>
+                        <textarea name="description" placeholder="内容を入力してください" class="form-control"><%= book.description%></textarea>
+                      </div>
+                    </div>
+                    <!-- 数量 -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>数量</label>
+                        <% if (currency_data !==null) { %>
+                          (<%= currency_data.option_value  %> )
+                        <% }else { %>
+
+                        <% } %>
+                        <input required value="<%= book.amount%>" name="amount" type="number" min="1" class="form-control" placeholder="数量を入力して下さい">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 書籍のカバー -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>書籍のカバー</label>
+                          <input type="file" name="cover_image" class="form-control">
+                          <br>
+                          <img src="<%= book.cover_image%>" alt="" style="width:80px; height:80px;">
+                      </div>
+                    </div>
+                    <!-- 著者名 -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>著者</label>
+                        <input required name="author" value="<%= book.author%>" type="text" class="form-control" placeholder="著者を入力して下さい">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ステータス -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>状態の選択</label>
+                        <select class="form-control" name="status">
+                          <option <% if(book.status === '1'){ %> selected <% } %> value="1">アクティブ</option>
+                          <option <% if(book.status === '0'){ %> selected <% } %> value="0">インアクティブ</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-dark" type="submit">送信</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+

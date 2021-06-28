@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= title  %> </title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <%- include("inc/stylesheet.ejs")%>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+<%- include("inc/top-nav")%>
+<%- include("inc/sidebar")%>
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <% if(messages.info) { %>
+
+      <div class="alert alert-success info">
+        <%= messages.info %>
+      </div>
+
+    <% } %>
+
+
+    <% if(messages.success) { %>
+
+      <div class="alert alert-success message">
+        <%= messages.success %>
+      </div>
+
+    <% } %>
+
+
+    <% if(messages.error) { %>
+      <div class="alert alert-danger message">
+        <%= messages.error %>
+      </div>
+    <% } %>

@@ -1,0 +1,118 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+  <%- include("partials/header")%>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">本の貸し出し</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">本の貸し出し</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">本の貸し出し</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+
+
+                <form id="form-issue-book" method="post" action="/admin/issue-book/">
+                  <div class="row">
+                    <!--  タイトル -->
+
+                    <!--  カテゴリーの選択 -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>カテゴリーの選択</label>
+                        <select class="form-control"  id="dd_category" name="dd_category" required>
+                          <option value="">カテゴリーの選択</option>
+                          <% categories.forEach(category => { %>
+                            <option value="<%= category.id %>"><%= category.name  %> </option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    <!--  Ajax 参照 script.js 本の選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>本の選択</label>
+                          <select class="form-control" name="dd_book" required id="dd_book_list">
+                           <option value="">本の選択</option>
+
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+
+                    <!--  ユーザーの選択 -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>ユーザーの選択</label>
+                        <select class="form-control" name="dd_user" required>
+                          <option value="">ユーザーの選択</option>
+                          <% users.forEach(user => { %>
+                            <option value="<%= user.id%>"><%= user.name  %> (<%= user.email%>) </option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    <!--  期間の選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>貸し出し期間</label>
+                          <select class="form-control" name="dd_days" required>
+                            <option value="">期間の選択</option>
+                            <% date.forEach(data => { %>
+                              <option value="<%= data.id%>"><%= data.total_days%>日</option>
+                            <% }) %>
+
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+
+
+
+                  <button class="btn btn-dark" type="submit">送信</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+

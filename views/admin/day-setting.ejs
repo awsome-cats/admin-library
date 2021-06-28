@@ -1,0 +1,114 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+  <%- include("partials/header")%>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">日付の設定</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">日付の設定</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">日付の設定</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="post" action="/admin/days-settings" id="form-add-days-settings">
+                  <div class="row">
+
+                    <!--  期間の選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>何日にしますか</label>
+                          <input type="number" placeholder="日にちを入力してください" min="1" class="form-control" name="day_count" required/>
+                        </div>
+                      </div>
+                  </div>
+
+                  <button class="btn btn-dark" type="submit">送信</button>
+                </form>
+
+                <div class="row" style="margin-top: 30px;">
+                    <!-- right column -->
+                    <div class="col-md-12">
+                        <table id="tbl-list-day-settings" class="table table-bordered table-striped">
+                            <thead>
+                              <tr>
+                                <th>#ID</th>
+                                <th>トータルデイズ</th>
+
+                                <th>アクション</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% daySettings.forEach(day => { %>
+                                <tr>
+                                  <td><%= day.id  %> </td>
+                                  <td><%= day.total_days  %>日 </td>
+                                  <td>
+                                    <form id="form-delete-days-<%= day.id%>" action="/admin/delete-day/<%= day.id  %>" method="post"
+                                    >
+                                    <input name="day_id" type="hidden" value="<%= day.id  %> ">
+                                    <input name="day_total_day" type="hidden" value="<%= day.total_days  %> ">
+                                  </form>
+                                <a onclick="if(confirm('<%= day.total_days%>日の設定を削除しますか?')){ $('#form-delete-days-<%= day.id%>').submit() }" href="javascript:void(0)" class="btn btn-danger">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                              <% }) %>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                              <tr>
+                                <th>#ID</th>
+                                <th>トータルデイズ</th>
+
+                                <th>アクション</th>
+                              </tr>
+                            </tr>
+                            </tfoot>
+                          </table>
+                    </div>
+                    <!--/.col (right) -->
+
+                  </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+

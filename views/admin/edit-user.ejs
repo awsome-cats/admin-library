@@ -1,0 +1,130 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+  <%- include("partials/header")%>
+
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">ユーザーの編集</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">ユーザーの編集</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">ユーザーの編集</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+
+                <form id="form-edit-user"
+                action="/admin/edit-user/<%= user.id%>"
+                method="post">
+                  <div class="row">
+                    <!--  氏名 -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>氏名</label>
+                        <input value="<%= user.name%>" required name="name" type="text" class="form-control" placeholder="氏名を入力して下さい">
+                      </div>
+                    </div>
+                    <!--  Eメール -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Eメール</label>
+                        <input value="<%= user.email%>" readonly name="email" type="email" class="form-control" placeholder="Eメールを入力して下さい">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 携帯電話 -->
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>携帯電話</label>
+                          <input value="<%= user.mobile%>" required name="mobile" type="text" class="form-control" placeholder="携帯電話を入力して下さい">
+                        </div>
+                      </div>
+                    <!-- 性別の選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>性別の選択</label>
+                          <select class="form-control" name="dd_gender" required>
+                            <option <% if (user.gender === 'male'){%>
+                              selected
+                            <% } %>value="male">male</option>
+                            <option <% if (user.gender === 'female'){%>
+                              selected
+                            <% } %>value="female">female</option>
+                            <option <% if (user.gender === 'lgbt'){%>
+                              selected
+                            <% } %>value="lgbt">lgbt</option>
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <!-- 住所 -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>住所</label>
+                        <textarea name="address" class="form-control" placeholder="住所を入力してください"><%= user.address%></textarea>
+                      </div>
+                    </div>
+                    <!-- 状態の選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>状態の選択</label>
+                          <select class="form-control" name="status">
+
+                              <option <% if (user.status === '1'){%>
+                                selected
+                              <% } %>value="1">アクティブ</option>
+                              <option <% if (user.status === '0'){%>
+                                selected
+                              <% } %>value="0">インアクティブ</option>
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+
+                  <button class="btn btn-dark" type="submit">送信</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+

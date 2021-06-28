@@ -1,0 +1,152 @@
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+
+<!-- page script -->
+<script>
+  $(function () {
+    if($("#tbl-list-category").length > 0) {
+      $("#tbl-list-category").DataTable();
+    }
+    if($("#tbl-list-book").length > 0) {
+      $("#tbl-list-book").DataTable();
+    }
+    if($("#tbl-list-user").length > 0) {
+      $("#tbl-list-user").DataTable();
+    }
+    if($("#tbl-list-issue-books").length > 0) {
+      $("#tbl-list-issue-books").DataTable();
+    }
+    if($("#tbl-list-return-books").length > 0) {
+      $("#tbl-list-return-books").DataTable();
+    }
+    if($("#tbl-list-day-settings").length > 0) {
+      $("#tbl-list-day-settings").DataTable();
+    }
+    if($("#tbl-list-return-books").length > 0) {
+      $("#tbl-list-return-books").DataTable();
+    }
+    //requiredとセット
+    if($("#form-add-category").length > 0 ){
+      $("#form-add-category").validate();
+    }
+    if($("#form-add-book").length > 0 ){
+      $("#form-add-book").validate();
+    }
+    if($("#form-add-user").length > 0 ){
+      $("#form-add-user").validate();
+    }
+    if($("#form-issue-book").length > 0 ){
+      $("#form-issue-book").validate();
+    }
+    if($("#form-return-book").length > 0 ){
+      $("#form-return-book").validate();
+    }
+    if($("#form-currency-settings").length > 0 ){
+      $("#form-currency-settings").validate();
+    }
+    if($("#form-add-days-settings").length > 0 ){
+      $("#form-add-days-settings").validate();
+    }
+
+    //jquery ajax //////////////
+    /* 関連のあるデータだけを返す　*/
+
+
+    let app_url = "http://localhost:3000";
+    $("#dd_category").on("change", function(){
+      let category_id = $(this).val()
+      console.log(category_id)
+
+      let postData = "cat_id=" + category_id;
+      // console.log('postdata', postData)
+      $.post(app_url + "/admin/category-list-book", postData, function(response){
+        // console.log('response', response)
+        let booksHtml = "<option value=''>本の選択</option>"
+        $.each(response.books, function(index, item){
+          booksHtml += "<option value='"+ item.id +"'>"+ item.name+'</option>'
+        });
+        $("#dd_book_list").html(booksHtml)
+      })
+    })
+
+    /* return book */
+
+    $("#return-dd-user").on("change", function(){
+      let user_id = $(this).val()
+      // console.log('usr_id',user_id)
+
+      let postData = "user_id=" + user_id;
+      // console.log('postdata', postData)
+      $.post(app_url + "/admin/user-list-book", postData, function(response){
+        // console.log(response)
+        let booksHtml = "<option value=''>本の選択</option>"
+        $.each(response.books, function(index, item){
+          booksHtml += "<option value='"+ item.bookId +"'>"+ item.Book.name+'</option>'
+        });
+        $("#dd_return_book").html(booksHtml)
+      })
+    })
+
+    //////////////////////////////
+
+    let message = $('.message');
+    if(message.length) {
+      setTimeout(() => {
+        message.fadeOut('slow')
+      }, 3000);
+    }
+
+
+    let preMessage = $('.preMsg');
+    if(preMessage.length) {
+      setTimeout(() => {
+        preMessage.fadeOut('slow')
+      }, 3000);
+    }
+
+
+    let info = $('.info');
+    if(info.length) {
+      info.fadeIn()
+      info.fadeOut(6000)
+
+    }
+  });
+</script>

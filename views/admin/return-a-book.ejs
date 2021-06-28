@@ -1,0 +1,87 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+  <%- include("partials/header")%>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">返却本</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">返却本</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">返却本</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <form id="form-return-book" method="post" action="/admin/return-a-book">
+                  <div class="row">
+                    <!--  タイトル -->
+
+
+                    <!--  ユーザーの選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>ユーザーの選択</label>
+                          <select class="form-control" name="dd_user" required id="return-dd-user">
+                            <option value="">ユーザーの選択</option>
+                            <% users.forEach(data => { %>
+                              <option value="<%= data.id%>"><%= data.name%> (<%= data.email %>)</option>
+                            <% }) %>
+                          </select>
+                        </div>
+                      </div>
+                    <!--  本の選択 -->
+                    <!--  Ajax 参照 script.js 本の選択 -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>本の選択</label>
+                          <select class="form-control" name="dd_book" id="dd_return_book" required>
+                            <option value="">本の選択</option>
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+
+                  <button class="btn btn-dark" type="submit">送信</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+
+

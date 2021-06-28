@@ -1,0 +1,81 @@
+  <!-- stylesheet.ejs top-nav.ejs sidebar.ejsを含む header -->
+  <%- include("partials/header")%>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">設定/<h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">ホーム</a></li>
+              <li class="breadcrumb-item active">通貨の設定</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- right column -->
+          <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">設定</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <div class="alert alert-success">
+                  現在の通貨:
+                  <% if(currency_data !== null) { %>
+                  <%= currency_data.option_value %>
+                  <% }else { %>
+                    <%'=='%>
+                  <%}%>
+                </div>
+
+                <form method="post" action="/admin/currency-settings" id="form-currency-settings">
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>通貨の設定</label>
+                          <select class="form-control" name="dd_currency" id="currency-setting" >
+                            <option value="">通貨の設定</option>
+                            <option value="JP">JP</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+
+                  <button class="btn btn-dark" type="submit">送信</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!--/.col (right) -->
+
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+    <%- include("partials/footer")%> <!-- scriptを含むfooter -->
+
+
+
